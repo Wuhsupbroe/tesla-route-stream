@@ -1,64 +1,76 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import './CyberDashboard.css'; // Contains the new cartoon styles
+import './CyberDashboard.css';
 import { routeData } from './data/routeData';
 import AccurateMap from './components/AccurateMap';
 
 export default function App() {
+  const [selectedPark, setSelectedPark] = useState(null);
   const parks = [routeData.start, ...routeData.parks];
 
-  const scrollToPark = (parkId) => {
-    const el = document.getElementById(parkId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+  const openParkModal = (park) => {
+    setSelectedPark(park);
   };
+
+  const closeModal = () => {
+    setSelectedPark(null);
+  };
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (selectedPark) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [selectedPark]);
 
   return (
     <div className="cartoon-app">
       
-      {/* Hero Header */}
-      <header className="cartoon-hero">
-        <h1>Tesla Adventure Roadmap</h1>
-        <p>Explore the conceptual journey across the spectacular West Coast.</p>
+      {/* Hero Header with Intro Animations */}
+      <header className="cartoon-hero fade-in-up-1">
+        <h1>Where Should I Drive Next?</h1>
+        <p>A 30-Day Interactive Tesla Stream. Vote on the route!</p>
       </header>
       
       {/* Cartoony Map Section */}
-      <section className="map-section">
-        <h2>The Route Map</h2>
-        <div className="map-container">
+      <section className="map-section fade-in-up-2">
+        <h2 className="pulse-text">Explore The Concept Map</h2>
+        <div className="map-container floating-subtle">
           <AccurateMap 
             parks={parks}
-            onSelectPark={(park) => scrollToPark(park.id)}
+            onSelectPark={(park) => openParkModal(park)}
           />
         </div>
       </section>
 
-      {/* Destinations Gallery */}
-      <section className="destinations-gallery">
-        {parks.map((park) => (
-          <article key={park.id} id={park.id} className="park-card">
+      {/* Destinations Modal Overlay */}
+      {selectedPark && (
+        <div className="park-modal-overlay" onClick={closeModal}>
+          <div className="park-modal-content bouncy-entrance" onClick={e => e.stopPropagation()}>
+            <button className="close-modal-btn" onClick={closeModal}>X</button>
             <div className="park-image-wrapper">
-              <img src={park.image} alt={park.name} />
+              <img src={selectedPark.image} alt={selectedPark.name} />
             </div>
             <div className="park-info">
-              <h2>{park.name}</h2>
-              <p>{park.description}</p>
+              <h2>{selectedPark.name}</h2>
+              <p>{selectedPark.description}</p>
               
-              {park.activities && (
+              {selectedPark.activities && (
                 <div className="activities-section">
-                  <h3 style={{ marginBottom: '10px', color: 'var(--secondary)', fontWeight: 900 }}>Concept Activities:</h3>
+                  <h3 style={{ marginBottom: '10px', color: 'var(--secondary)', fontWeight: 900 }}>Potential Activities:</h3>
                   <div className="activities">
-                    {park.activities.map((act, idx) => (
+                    {selectedPark.activities.map((act, idx) => (
                       <span key={idx} className="activity-pill">{act}</span>
                     ))}
                   </div>
                 </div>
               )}
             </div>
-          </article>
-        ))}
-      </section>
+          </div>
+        </div>
+      )}
 
     </div>
   );
