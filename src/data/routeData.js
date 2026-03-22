@@ -4,7 +4,7 @@ export const routeData = {
     name: "Phoenix, AZ",
     coordinates: [-112.0740, 33.4484],
     description: "The journey begins here. Fully charged and ready to hit the road.",
-    image: "https://images.unsplash.com/photo-1543884841-38e235e21fb5?q=80&w=1474&auto=format&fit=crop",
+    image: "/tesla-route-stream/phoenix_start_concept_1774151083552.png",
     type: "start"
   },
   parks: [
@@ -15,7 +15,7 @@ export const routeData = {
       coordinates: [-112.1129, 36.1069],
       description: "A jaw-dropping natural wonder. Hike the rim or descend into the canyon.",
       activities: ["Hike the Bright Angel Trail", "Helicopter Tour", "Sunset at Hopi Point"],
-      image: "https://images.unsplash.com/photo-1474044159687-1ee9f3a51722?q=80&w=1470&auto=format&fit=crop"
+      image: "/tesla-route-stream/grand_canyon_concept_1774151097430.png"
     },
     {
       id: "joshua-tree",
@@ -24,7 +24,7 @@ export const routeData = {
       coordinates: [-115.9010, 33.8734],
       description: "Where two deserts meet. Surreal rock formations and iconic twisted trees.",
       activities: ["Stargazing at Skull Rock", "Climb Hidden Valley", "Keys View Sunset"],
-      image: "https://images.unsplash.com/photo-1504280537473-10eb0fb637c3?q=80&w=1470&auto=format&fit=crop"
+      image: "/tesla-route-stream/joshua_tree_concept_1774151110286.png"
     },
     {
       id: "zion",
@@ -33,7 +33,7 @@ export const routeData = {
       coordinates: [-113.0263, 37.2982],
       description: "Massive canyon walls and emerald pools. A true hiker's paradise.",
       activities: ["Climb Angels Landing", "Wade The Narrows", "Canyon Overlook Trail"],
-      image: "https://images.unsplash.com/photo-1518457607834-6e8d80c183c5?q=80&w=1374&auto=format&fit=crop"
+      image: "/tesla-route-stream/zion_concept_1774151132495.png"
     },
     {
       id: "death-valley",
@@ -42,7 +42,7 @@ export const routeData = {
       coordinates: [-116.8259, 36.5323],
       description: "The hottest and driest. Discover salt flats, sand dunes, and mysterious moving rocks.",
       activities: ["Badwater Basin", "Zabriskie Point Sunrise", "Mesquite Flat Sand Dunes"],
-      image: "https://images.unsplash.com/photo-1470876798053-ec4e6f42c2aa?q=80&w=1470&auto=format&fit=crop"
+      image: "/tesla-route-stream/death_valley_concept_1774151144492.png"
     },
     {
       id: "sequoia",
@@ -51,7 +51,7 @@ export const routeData = {
       coordinates: [-118.5658, 36.4864],
       description: "Home of the giants. Walk among the largest trees on the planet.",
       activities: ["General Sherman Tree", "Climb Moro Rock", "Tunnel Log Drive"],
-      image: "https://images.unsplash.com/photo-1521192823678-0eec9f6a7071?q=80&w=1471&auto=format&fit=crop"
+      image: "/tesla-route-stream/sequoia_concept_1774151159220.png"
     },
     {
       id: "yosemite",
@@ -60,7 +60,7 @@ export const routeData = {
       coordinates: [-119.5383, 37.8651],
       description: "Iconic granite cliffs, towering waterfalls, and lush valleys.",
       activities: ["Hike Half Dome", "Yosemite Falls", "Glacier Point View"],
-      image: "https://images.unsplash.com/photo-1533246321-70bfb01e3e78?q=80&w=1632&auto=format&fit=crop"
+      image: "/tesla-route-stream/yosemite_concept_1774151174059.png"
     },
     {
       id: "bryce-canyon",
@@ -69,7 +69,7 @@ export const routeData = {
       coordinates: [-112.1871, 37.5930],
       description: "The largest collection of hoodoos in the world. An alien landscape of red rock.",
       activities: ["Navajo Loop Trail", "Sunrise Point", "Stargazing Tour"],
-      image: "https://images.unsplash.com/photo-1517869661414-f4fa3ec677b1?q=80&w=1498&auto=format&fit=crop"
+      image: "/tesla-route-stream/bryce_canyon_concept_1774151184309.png"
     }
   ],
   routes: [

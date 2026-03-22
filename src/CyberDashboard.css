@@ -333,33 +333,23 @@
   letter-spacing: 1px;
 }
 
-.poll-btn {
-  position: relative;
+.concept-activity-btn {
   background: rgba(255,255,255,0.03);
-  border: 1px solid var(--surface-border);
+  border: 1px dashed var(--surface-border);
   border-radius: 12px;
   padding: 16px;
   color: white;
   font-weight: 600;
-  text-align: left;
-  cursor: pointer;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
   transition: all 0.3s ease;
 }
 
-.poll-btn:hover {
+.concept-activity-btn:hover {
   border-color: var(--primary);
+  border-style: solid;
   background: rgba(0, 255, 255, 0.05);
-}
-
-.poll-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: linear-gradient(90deg, rgba(0, 255, 255, 0.1), rgba(0, 255, 255, 0.3));
-  z-index: 0;
-  border-right: 2px solid var(--primary);
+  transform: translateX(5px);
 }
 
 .poll-text {

@@ -51,17 +51,17 @@ export default function App() {
           <div className="trip-status-widget glass-panel">
             <div className="status-item">
               <span className="status-label">DAY</span>
-              <span className="status-val">12 <span className="dim">/ 30</span></span>
+              <span className="status-val">TBD <span className="dim">/ 30</span></span>
             </div>
             <div className="status-divider"></div>
             <div className="status-item">
               <span className="status-label">DISTANCE</span>
-              <span className="status-val">4,280 <span className="dim">MI</span></span>
+              <span className="status-val">TBD <span className="dim">MI</span></span>
             </div>
             <div className="status-divider"></div>
             <div className="status-item">
               <span className="status-label"><Battery size={14} color="var(--primary)"/> BATTERY</span>
-              <span className="status-val text-gradient-cyan">82%</span>
+              <span className="status-val text-gradient-cyan">---%</span>
             </div>
           </div>
         </header>
@@ -79,19 +79,7 @@ export default function App() {
       {/* RIGHT: INTERACTIVE CONTROL PANEL */}
       <aside className="control-panel">
         
-        {/* Live Stream Viewfinder Overlay */}
-        <div className="live-stream-widget glass-panel">
-          <div className="stream-header">
-            <span className="live-badge">LIVE NOW</span>
-            <span className="viewer-count">14.2k Viewers</span>
-          </div>
-          <div className="stream-thumbnail">
-            <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?q=80&w=800&auto=format&fit=crop" alt="Tesla Cam" />
-            <div className="play-button"><Activity size={24} color="var(--bg-dark)"/></div>
-          </div>
-        </div>
-
-        {/* Dynamic Context Panel (Voting / Next Stop) */}
+        {/* Dynamic Context Panel (Concept Info) */}
         <div className="voting-panel glass-panel">
           {selectedPark ? (
             <div className="park-detail-view slide-in">
@@ -101,12 +89,11 @@ export default function App() {
               
               {selectedPark.activities && (
                 <div className="poll-container">
-                  <h3 className="poll-title">VOTE: Next Activity</h3>
+                  <h3 className="poll-title">Potential Activities</h3>
                   {selectedPark.activities.map((act, idx) => (
-                    <button key={idx} className="poll-btn">
+                    <div key={idx} className="concept-activity-btn">
                       <span className="poll-text">{act}</span>
-                      <span className="poll-bar" style={{ width: `${Math.floor(Math.random() * 60) + 20}%`}}></span>
-                    </button>
+                    </div>
                   ))}
                 </div>
               )}
@@ -114,8 +101,8 @@ export default function App() {
           ) : (
             <div className="empty-voting">
               <div className="empty-icon"><MapPin size={48} color="var(--surface-border)" /></div>
-              <h3>No Destination Selected</h3>
-              <p>Click a glowing pin on the cartoon map to preview the location and cast your vote.</p>
+              <h3>Explore The Route</h3>
+              <p>Click a glowing pin on the cartoon map to preview destinations and concept activities.</p>
             </div>
           )}
         </div>
