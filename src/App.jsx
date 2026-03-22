@@ -3,6 +3,7 @@ import './App.css';
 import './CyberDashboard.css';
 import { Map, MessageSquare, Image as ImageIcon, Trophy, Zap, MapPin, Navigation, Signal, Battery, Activity } from 'lucide-react';
 import { routeData } from './data/routeData';
+import AccurateMap from './components/AccurateMap';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('map');
@@ -65,36 +66,13 @@ export default function App() {
           </div>
         </header>
 
-        {/* The "Cartoon 3D Map" visual container */}
+        {/* Accurate Geographical Map Viewport */}
         <div className="cartoon-map-viewport">
-          <img src="https://images.unsplash.com/photo-1542224566-6e85f2e6772f?q=80&w=2000&auto=format&fit=crop" alt="Stylized background" className="cartoon-map-bg" />
-          <div className="map-overlay-layer">
-            
-            {/* Render stylized 3D map pins */}
-            <div className="route-network">
-              {parks.map((park, i) => {
-                const isSelected = selectedPark?.id === park.id;
-                // Scatter them playfully (in a real app, uses precise absolute % coords)
-                const top = 15 + (i * 12) + (i % 2 === 0 ? 10 : 0) + '%';
-                const left = 20 + (i * 10) + (i % 2 === 0 ? -15 : 15) + '%';
-                
-                return (
-                  <div 
-                    key={park.id} 
-                    className={`map-pin-3d ${isSelected ? 'selected' : ''}`} 
-                    style={{ top, left }}
-                    onClick={() => setSelectedPark(park)}
-                  >
-                    <div className="pin-head">
-                      {park.id === 'phoenix' ? <Navigation size={18} /> : <MapPin size={18} />}
-                    </div>
-                    <div className="pin-shadow"></div>
-                    <div className="pin-label glass-panel">{park.name}</div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
+          <AccurateMap 
+            parks={parks}
+            selectedPark={selectedPark}
+            onSelectPark={setSelectedPark}
+          />
         </div>
       </main>
 
