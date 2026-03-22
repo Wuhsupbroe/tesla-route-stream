@@ -5,7 +5,6 @@ import {
   Geography,
   Marker,
 } from "react-simple-maps";
-import { Navigation, MapPin } from 'lucide-react';
 import './AccurateMap.css';
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
@@ -13,13 +12,10 @@ const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 // West coast focused projection
 const mapProjectionConfig = {
   scale: 2500,
-  center: [-115, 36.5] // Roughly centers around Nevada/California/Arizona
+  center: [-115, 36.5]
 };
 
-export default function AccurateMap({ parks, selectedPark, onSelectPark }) {
-  // We only want to vaguely highlight or show the states we care about,
-  // or just show the whole map but it's zoomed in.
-  
+export default function AccurateMap({ parks, onSelectPark }) {
   return (
     <div className="accurate-map-container">
       <ComposableMap
@@ -36,12 +32,12 @@ export default function AccurateMap({ parks, selectedPark, onSelectPark }) {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  fill="rgba(10, 14, 20, 0.4)"
-                  stroke="rgba(0, 255, 255, 0.15)"
-                  strokeWidth={1}
+                  fill="#BDE7BD"          /* Light grassy green */
+                  stroke="#2C3E50"        /* Thick dark cartoon outline */
+                  strokeWidth={2}
                   style={{
                     default: { outline: "none" },
-                    hover: { fill: "rgba(0, 255, 255, 0.05)", outline: "none" },
+                    hover: { fill: "#A5D6A5", outline: "none" },
                     pressed: { outline: "none" },
                   }}
                 />
@@ -51,27 +47,25 @@ export default function AccurateMap({ parks, selectedPark, onSelectPark }) {
         </Geographies>
 
         {parks.map((park) => {
-          const isSelected = selectedPark?.id === park.id;
-          const isStart = park.id === "phoenix";
-
           return (
             <Marker key={park.id} coordinates={park.coordinates} onClick={() => onSelectPark(park)}>
-              <g className={`map-marker-group ${isSelected ? "selected" : ""}`}>
-                {/* The glowing shadow base */}
-                <ellipse cx="0" cy="8" rx="10" ry="4" className="marker-shadow" />
+              <g className="map-marker-cartoon">
+                {/* A thick shadow */}
+                <ellipse cx="0" cy="10" rx="14" ry="6" className="marker-shadow" />
                 
-                {/* The pin itself */}
-                <g className="marker-pin-head" transform="translate(0, -15)">
+                {/* Big bouncing cartoon pin */}
+                <g className="marker-pin-head">
                   <path
-                    d="M0,0 C-10,-10 -15,-20 -15,-30 A15,15 0 1,1 15,-30 C15,-20 10,-10 0,0 Z"
+                    d="M0,0 C-15,-15 -25,-30 -25,-45 A25,25 0 1,1 25,-45 C25,-30 15,-15 0,0 Z"
                     className="marker-path"
                   />
-                  {/* Inner Icon could go here, for now SVG path is enough */}
+                  <circle cx="0" cy="-45" r="10" fill="#ffffff" />
                 </g>
                 
+                {/* Bold white text with dark outline */}
                 <text
                   textAnchor="middle"
-                  y="20"
+                  y="25"
                   className="marker-label"
                 >
                   {park.name}

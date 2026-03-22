@@ -1,113 +1,65 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import './CyberDashboard.css';
-import { Map, MessageSquare, Image as ImageIcon, Trophy, Zap, MapPin, Navigation, Signal, Battery, Activity } from 'lucide-react';
+import './CyberDashboard.css'; // Contains the new cartoon styles
 import { routeData } from './data/routeData';
 import AccurateMap from './components/AccurateMap';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('map');
-  const [selectedPark, setSelectedPark] = useState(null);
-
   const parks = [routeData.start, ...routeData.parks];
 
+  const scrollToPark = (parkId) => {
+    const el = document.getElementById(parkId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
   return (
-    <div className="cyber-dashboard">
-      {/* LEFT NAVIGATION HUD */}
-      <nav className="side-nav glass-panel">
-        <div className="nav-logo">
-          <Zap size={32} color="var(--primary)" className="glow-icon" />
-        </div>
-        <div className="nav-links">
-          <button className={`nav-btn ${activeTab === 'map' ? 'active' : ''}`} onClick={() => setActiveTab('map')}>
-            <Map size={24} />
-          </button>
-          <button className={`nav-btn ${activeTab === 'chat' ? 'active' : ''}`} onClick={() => setActiveTab('chat')}>
-            <MessageSquare size={24} />
-          </button>
-          <button className={`nav-btn ${activeTab === 'gallery' ? 'active' : ''}`} onClick={() => setActiveTab('gallery')}>
-            <ImageIcon size={24} />
-          </button>
-          <button className={`nav-btn ${activeTab === 'leaderboard' ? 'active' : ''}`} onClick={() => setActiveTab('leaderboard')}>
-            <Trophy size={24} />
-          </button>
-        </div>
-        <div className="nav-bottom">
-          <div className="live-indicator">
-            <Signal size={20} color="var(--tertiary)" className="pulse-signal" />
-          </div>
-        </div>
-      </nav>
-
-      {/* CENTER: 3D CARTOON MAP ARENA */}
-      <main className="map-arena glass-panel">
-        <header className="arena-header">
-          <div>
-            <h1 className="heading-display"><span className="text-gradient-cyan">Route</span> Command</h1>
-            <p style={{ color: 'var(--text-muted)' }}>Interactive 30-Day Tesla Road Trip</p>
-          </div>
-          
-          {/* Trip Status Widget inline */}
-          <div className="trip-status-widget glass-panel">
-            <div className="status-item">
-              <span className="status-label">DAY</span>
-              <span className="status-val">TBD <span className="dim">/ 30</span></span>
-            </div>
-            <div className="status-divider"></div>
-            <div className="status-item">
-              <span className="status-label">DISTANCE</span>
-              <span className="status-val">TBD <span className="dim">MI</span></span>
-            </div>
-            <div className="status-divider"></div>
-            <div className="status-item">
-              <span className="status-label"><Battery size={14} color="var(--primary)"/> BATTERY</span>
-              <span className="status-val text-gradient-cyan">---%</span>
-            </div>
-          </div>
-        </header>
-
-        {/* Accurate Geographical Map Viewport */}
-        <div className="cartoon-map-viewport">
+    <div className="cartoon-app">
+      
+      {/* Hero Header */}
+      <header className="cartoon-hero">
+        <h1>Tesla Adventure Roadmap</h1>
+        <p>Explore the conceptual journey across the spectacular West Coast.</p>
+      </header>
+      
+      {/* Cartoony Map Section */}
+      <section className="map-section">
+        <h2>The Route Map</h2>
+        <div className="map-container">
           <AccurateMap 
             parks={parks}
-            selectedPark={selectedPark}
-            onSelectPark={setSelectedPark}
+            onSelectPark={(park) => scrollToPark(park.id)}
           />
         </div>
-      </main>
+      </section>
 
-      {/* RIGHT: INTERACTIVE CONTROL PANEL */}
-      <aside className="control-panel">
-        
-        {/* Dynamic Context Panel (Concept Info) */}
-        <div className="voting-panel glass-panel">
-          {selectedPark ? (
-            <div className="park-detail-view slide-in">
-              <img src={selectedPark.image} alt={selectedPark.name} className="park-hero-img" />
-              <h2 className="heading-section text-gradient-cyan">{selectedPark.name}</h2>
-              <p className="park-desc">{selectedPark.description}</p>
+      {/* Destinations Gallery */}
+      <section className="destinations-gallery">
+        {parks.map((park) => (
+          <article key={park.id} id={park.id} className="park-card">
+            <div className="park-image-wrapper">
+              <img src={park.image} alt={park.name} />
+            </div>
+            <div className="park-info">
+              <h2>{park.name}</h2>
+              <p>{park.description}</p>
               
-              {selectedPark.activities && (
-                <div className="poll-container">
-                  <h3 className="poll-title">Potential Activities</h3>
-                  {selectedPark.activities.map((act, idx) => (
-                    <div key={idx} className="concept-activity-btn">
-                      <span className="poll-text">{act}</span>
-                    </div>
-                  ))}
+              {park.activities && (
+                <div className="activities-section">
+                  <h3 style={{ marginBottom: '10px', color: 'var(--secondary)', fontWeight: 900 }}>Concept Activities:</h3>
+                  <div className="activities">
+                    {park.activities.map((act, idx) => (
+                      <span key={idx} className="activity-pill">{act}</span>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
-          ) : (
-            <div className="empty-voting">
-              <div className="empty-icon"><MapPin size={48} color="var(--surface-border)" /></div>
-              <h3>Explore The Route</h3>
-              <p>Click a glowing pin on the cartoon map to preview destinations and concept activities.</p>
-            </div>
-          )}
-        </div>
+          </article>
+        ))}
+      </section>
 
-      </aside>
     </div>
   );
 }

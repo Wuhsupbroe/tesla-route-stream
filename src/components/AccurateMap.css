@@ -2,69 +2,62 @@
   width: 100%;
   height: 100%;
   position: relative;
-  background: radial-gradient(circle at center, rgba(10, 14, 20, 0.2) 0%, rgba(10, 14, 20, 0.8) 100%);
+  background: #87CEEB; /* Cartoon sky blue / water color */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.map-marker-group {
+.map-marker-cartoon {
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.map-marker-cartoon .marker-path {
+  fill: #E71D36; /* Bright Red */
+  stroke: #2C3E50; /* Dark thick cartoon border text-main */
+  stroke-width: 4px;
+  stroke-linejoin: round;
   transition: all 0.3s ease;
 }
 
-.map-marker-group .marker-path {
-  fill: var(--bg-dark);
-  stroke: var(--primary);
-  stroke-width: 2px;
-  transition: all 0.3s ease;
-}
-
-.map-marker-group:hover .marker-path {
-  fill: var(--primary);
-  stroke: #fff;
-  filter: drop-shadow(0 0 10px var(--primary-glow));
-}
-
-.map-marker-group.selected .marker-path {
-  fill: var(--secondary);
-  stroke: #fff;
-  filter: drop-shadow(0 0 15px var(--secondary-glow));
+.map-marker-cartoon:hover .marker-path {
+  fill: #FF9F1C; /* Orange on hover */
+  transform: scale(1.1);
 }
 
 .marker-shadow {
-  fill: rgba(0, 0, 0, 0.5);
-  filter: blur(2px);
+  fill: rgba(44, 62, 80, 0.4); /* Dark muted shadow */
   transition: all 0.3s ease;
 }
 
-.map-marker-group:hover .marker-shadow,
-.map-marker-group.selected .marker-shadow {
+.map-marker-cartoon:hover .marker-shadow {
   transform: scale(0.6);
   opacity: 0.5;
 }
 
-.map-marker-group:hover .marker-pin-head,
-.map-marker-group.selected .marker-pin-head {
-  transform: translateY(-25px);
+.map-marker-cartoon .marker-pin-head {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.map-marker-cartoon:hover .marker-pin-head {
+  transform: translateY(-15px);
 }
 
 .marker-label {
-  fill: var(--text-main);
+  fill: #ffffff;
   font-family: var(--font-heading);
-  font-size: 14px;
-  font-weight: 700;
-  opacity: 0;
+  font-size: 16px;
+  font-weight: 900;
   pointer-events: none;
-  transition: opacity 0.3s ease;
   paint-order: stroke;
-  stroke: var(--bg-dark);
-  stroke-width: 3px;
+  stroke: #2C3E50;
+  stroke-width: 6px;
   stroke-linecap: round;
   stroke-linejoin: round;
+  transition: transform 0.3s ease;
 }
 
-.map-marker-group:hover .marker-label,
-.map-marker-group.selected .marker-label {
-  opacity: 1;
+.map-marker-cartoon:hover .marker-label {
+  transform: translateY(5px);
 }

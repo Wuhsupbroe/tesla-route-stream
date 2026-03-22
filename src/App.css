@@ -1,24 +1,21 @@
-:root {
-  /* Cyber Obsidian Theme from Stitch */
-  --bg-dark: #0a0e14;
-  --bg-card: rgba(21, 26, 33, 0.7);
-  --bg-card-hover: rgba(27, 32, 40, 0.9);
-  
-  --text-main: #f1f3fc;
-  --text-muted: #a8abb3;
-  
-  --primary: #c1fffe; /* Neon Cyan */
-  --primary-glow: #00ffff;
-  
-  --secondary: #d873ff; /* Electric Purple */
-  --secondary-glow: #9900ce;
-  
-  --tertiary: #ff7072; /* Tesla Red */
-  
-  --surface-border: rgba(114, 117, 125, 0.15); /* Ghost Border */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
 
-  --font-heading: 'Outfit', 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
+:root {
+  --bg-color: #87CEEB; /* Sky blue */
+  --bg-card: #ffffff;
+  --text-main: #2C3E50;
+  --text-muted: #5D6D7E;
+  --primary: #FF9F1C; /* Vibrant Orange */
+  --secondary: #2EC4B6; /* Vibrant Teal */
+  --accent: #E71D36; /* Rose Red */
+  
+  --border-radius: 24px;
+  --border-thick: 4px solid var(--text-main);
+  --shadow-bouncy: 0 8px 0 rgba(44, 62, 80, 0.15);
+  --shadow-hover: 0 12px 0 rgba(44, 62, 80, 0.2);
+  
+  --font-main: 'Nunito', sans-serif;
+  --font-heading: 'Nunito', sans-serif;
 }
 
 * {
@@ -27,91 +24,27 @@
   padding: 0;
 }
 
-body {
-  background-color: var(--bg-dark);
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-color);
   color: var(--text-main);
-  font-family: var(--font-body);
+  font-family: var(--font-main);
   overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+  smooth-scroll: true;
+  scroll-behavior: smooth;
 }
 
-/* Glassmorphism Panel Base */
-.glass-panel {
-  background: var(--bg-card);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--surface-border);
-  border-radius: 32px; /* Large, friendly curves */
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
+/* Background Clouds pattern or solid */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 0%, transparent 60%);
+  background-size: 100px 100px;
+  z-index: -1;
+  pointer-events: none;
 }
-
-.glass-panel:hover {
-  background: var(--bg-card-hover);
-}
-
-/* Text Styles */
-.heading-display {
-  font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-}
-
-.heading-section {
-  font-family: var(--font-heading);
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  font-weight: 700;
-}
-
-.text-gradient-cyan {
-  background: linear-gradient(135deg, var(--primary) 0%, #00b3b3 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-}
-
-.text-gradient-purple {
-  background: linear-gradient(135deg, var(--secondary) 0%, #aa00ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Animations */
-@keyframes bloomGlow {
-  0% { box-shadow: 0 0 15px rgba(0, 255, 255, 0.2); }
-  50% { box-shadow: 0 0 30px rgba(0, 255, 255, 0.5); }
-  100% { box-shadow: 0 0 15px rgba(0, 255, 255, 0.2); }
-}
-
-@keyframes floatMapNode {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-/* App Container */
-.cyber-dashboard {
-  display: grid;
-  grid-template-columns: 80px 1fr 340px;
-  grid-template-rows: 100vh;
-  gap: 24px;
-  padding: 24px;
-  background-image: 
-    radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.03) 0%, transparent 60%),
-    radial-gradient(circle at 100% 0%, rgba(216, 115, 255, 0.05) 0%, transparent 40%);
-}
-
-@media (max-width: 1200px) {
-  .cyber-dashboard {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    height: auto;
-  }
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-dark); }
-::-webkit-scrollbar-thumb { background: var(--surface-border); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--primary); }
