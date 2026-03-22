@@ -4,6 +4,7 @@ import {
   Geographies,
   Geography,
   Marker,
+  Line
 } from "react-simple-maps";
 import './AccurateMap.css';
 
@@ -15,7 +16,13 @@ const mapProjectionConfig = {
   center: [-115, 36.5]
 };
 
-export default function AccurateMap({ parks, onSelectPark }) {
+export default function AccurateMap({ parks, routes, onSelectPark }) {
+  // Build a lookup map holding coordinates for each park id to easily draw lines
+  const parkCoords = {};
+  parks.forEach(p => {
+    parkCoords[p.id] = p.coordinates;
+  });
+
   return (
     <div className="accurate-map-container">
       <ComposableMap
@@ -46,6 +53,29 @@ export default function AccurateMap({ parks, onSelectPark }) {
           }
         </Geographies>
 
+        {/* Draw the visual branching route lines connecting the parks */}
+        {routes && routes.map((routeBlock, idx) => {
+          const fromCoords = parkCoords[routeBlock.from];
+          if (!fromCoords) return null;
+          
+          return routeBlock.to.map((destId, toIdx) => {
+            const toCoords = parkCoords[destId];
+            if (!toCoords) return null;
+            return (
+              <Line
+                key={`${idx}-${toIdx}`}
+                from={fromCoords}
+                to={toCoords}
+                stroke="#FF9F1C"
+                strokeWidth={4}
+                strokeLinecap="round"
+                className="animated-dashed-line"
+              />
+            );
+          });
+        })}
+
+        {/* Draw the massive bouncy cartoon pins */}
         {parks.map((park) => {
           return (
             <Marker key={park.id} coordinates={park.coordinates} onClick={() => onSelectPark(park)}>

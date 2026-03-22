@@ -66,6 +66,51 @@
   color: var(--text-muted);
 }
 
+.how-it-works-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.story-step {
+  background: var(--bg-color);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  border: var(--border-thick);
+  box-shadow: 0 4px 0 rgba(44, 62, 80, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  opacity: 0; /* Handled by bouncy-entrance */
+}
+
+.step-icon {
+  background: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+}
+
+.story-step h3 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--accent);
+}
+
+.story-step p {
+  font-size: 1rem;
+  color: var(--text-main);
+  font-weight: 700;
+}
+
 .map-section {
   background: #fff;
   border: var(--border-thick);

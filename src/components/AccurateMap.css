@@ -61,3 +61,14 @@
 .map-marker-cartoon:hover .marker-label {
   transform: translateY(5px);
 }
+
+.animated-dashed-line {
+  stroke-dasharray: 10, 10;
+  animation: dashAnim 1s linear infinite;
+}
+
+@keyframes dashAnim {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
