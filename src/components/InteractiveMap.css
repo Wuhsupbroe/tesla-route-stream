@@ -1,0 +1,147 @@
+.map-container {
+  padding: 80px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.text-muted {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-top: 12px;
+}
+
+.map-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  flex: 1;
+}
+
+@media (min-width: 1024px) {
+  .map-layout {
+    flex-direction: row;
+    gap: 60px;
+  }
+}
+
+.nodes-container {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 40px 0;
+}
+
+/* Simulate the "path" connecting the stages */
+.map-connections-bg {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  right: 5%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(232, 33, 39, 0.4) 50%, rgba(255,255,255,0.1) 100%);
+  z-index: 0;
+  transform: translateY(-50%);
+  border-radius: 2px;
+}
+
+.stage-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+  z-index: 1;
+  position: relative;
+}
+
+.route-node {
+  padding: 16px 24px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  background: rgba(20, 20, 25, 0.8);
+  min-width: 140px;
+}
+
+.route-node:hover {
+  transform: translateY(-5px);
+  border-color: rgba(232, 33, 39, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.route-node.active {
+  border-color: var(--accent-primary);
+  background: rgba(232, 33, 39, 0.1);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.node-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #444;
+  border: 2px solid #222;
+  transition: all 0.3s ease;
+}
+
+.route-node:hover .node-indicator {
+  background: white;
+  box-shadow: 0 0 10px white;
+}
+
+.route-node.active .node-indicator {
+  background: var(--accent-primary);
+  border-color: #fff;
+  box-shadow: 0 0 15px var(--accent-primary);
+}
+
+.start-node .node-indicator {
+  background: var(--neon-blue);
+  box-shadow: 0 0 15px var(--neon-blue);
+}
+
+.node-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.card-viewer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-state {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 40px;
+}
+
+.pulse-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--accent-primary);
+  animation: pulseGlow 2s infinite;
+}
